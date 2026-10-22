@@ -94,15 +94,15 @@ VL_INLINE_OPT void Vuart_top::_sequent__TOP__4(Vuart_top__Syms* __restrict vlSym
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vuart_top::_sequent__TOP__4\n"); );
     Vuart_top* const __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
     // Variables
-    CData/*0:0*/ __Vdly__uart_top__DOT__s10_armed;
-    CData/*1:0*/ __Vdly__uart_top__DOT__s10_cnt;
     CData/*3:0*/ __Vdly__uart_top__DOT__s9_cnt;
     CData/*3:0*/ __Vdly__uart_top__DOT__s6_cnt;
     CData/*0:0*/ __Vdly__uart_top__DOT__s6_armed;
     CData/*2:0*/ __Vdly__uart_top__DOT__s2_gap;
+    CData/*4:0*/ __Vdly__uart_top__DOT__s7_cnt;
+    CData/*0:0*/ __Vdly__uart_top__DOT__s10_armed;
+    CData/*1:0*/ __Vdly__uart_top__DOT__s10_cnt;
     CData/*3:0*/ __Vdly__uart_top__DOT__ts_bit;
     CData/*3:0*/ __Vdly__uart_top__DOT__rs_bit;
-    CData/*4:0*/ __Vdly__uart_top__DOT__s7_cnt;
     // Body
     __Vdly__uart_top__DOT__s9_cnt = vlTOPp->uart_top__DOT__s9_cnt;
     __Vdly__uart_top__DOT__s7_cnt = vlTOPp->uart_top__DOT__s7_cnt;
@@ -131,9 +131,6 @@ VL_INLINE_OPT void Vuart_top::_sequent__TOP__4(Vuart_top__Syms* __restrict vlSym
     } else {
         vlTOPp->cov_seq8 = 0U;
     }
-    vlTOPp->cov_overrun = ((IData)(vlTOPp->rst_n) & (IData)(vlTOPp->uart_top__DOT__rx_core_overrun));
-    vlTOPp->cov_frame_err = ((IData)(vlTOPp->rst_n) 
-                             & (IData)(vlTOPp->uart_top__DOT__rx_core_frame_err));
     if (vlTOPp->rst_n) {
         vlTOPp->cov_seq9 = 0U;
         if (vlTOPp->uart_top__DOT__idle_all) {
@@ -274,8 +271,6 @@ VL_INLINE_OPT void Vuart_top::_sequent__TOP__4(Vuart_top__Syms* __restrict vlSym
     vlTOPp->uart_top__DOT__s6_cnt = __Vdly__uart_top__DOT__s6_cnt;
     vlTOPp->uart_top__DOT__s6_armed = __Vdly__uart_top__DOT__s6_armed;
     vlTOPp->uart_top__DOT__cov_seq8 = vlTOPp->cov_seq8;
-    vlTOPp->uart_top__DOT__cov_overrun = vlTOPp->cov_overrun;
-    vlTOPp->uart_top__DOT__cov_frame_err = vlTOPp->cov_frame_err;
     vlTOPp->uart_top__DOT__cov_seq9 = vlTOPp->cov_seq9;
     vlTOPp->uart_top__DOT__cov_seq7 = vlTOPp->cov_seq7;
     vlTOPp->uart_top__DOT__cov_seq10 = vlTOPp->cov_seq10;
@@ -623,7 +618,9 @@ VL_INLINE_OPT void Vuart_top::_sequent__TOP__5(Vuart_top__Syms* __restrict vlSym
         = vlTOPp->uart_top__DOT__rx_core_tdata;
     vlTOPp->uart_top__DOT__u_rx__DOT__overrun_error 
         = vlTOPp->uart_top__DOT__rx_core_overrun;
+    vlTOPp->cov_overrun = vlTOPp->uart_top__DOT__rx_core_overrun;
     vlTOPp->uart_top__DOT__u_rx__DOT__frame_error = vlTOPp->uart_top__DOT__rx_core_frame_err;
+    vlTOPp->cov_frame_err = vlTOPp->uart_top__DOT__rx_core_frame_err;
     vlTOPp->uart_top__DOT__u_rx__DOT__m_axis_tvalid 
         = vlTOPp->uart_top__DOT__rx_core_tvalid;
     vlTOPp->uart_top__DOT__u_rx__DOT__busy = vlTOPp->uart_top__DOT__rx_core_busy;
@@ -633,6 +630,8 @@ VL_INLINE_OPT void Vuart_top::_sequent__TOP__5(Vuart_top__Syms* __restrict vlSym
                         | (IData)(vlTOPp->uart_top__DOT__rx_core_busy));
     vlTOPp->uart_top__DOT__u_tx__DOT__s_axis_tready 
         = vlTOPp->uart_top__DOT__tx_core_tready;
+    vlTOPp->uart_top__DOT__cov_overrun = vlTOPp->cov_overrun;
+    vlTOPp->uart_top__DOT__cov_frame_err = vlTOPp->cov_frame_err;
     vlTOPp->uart_top__DOT__cov_busy = vlTOPp->cov_busy;
 }
 

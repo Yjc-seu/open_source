@@ -1,0 +1,469 @@
+{
+  "dut_name": "divsqrt_public",
+  "version": "v1.0",
+  "total_bins": 92,
+  "coverpoints": [
+    {
+      "name": "cov_state",
+      "type": "basic",
+      "signal": "cov_state",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "state_idle", "value": 0 },
+        { "name": "state_busy_div", "value": 1 },
+        { "name": "state_busy_sqrt", "value": 2 },
+        { "name": "state_ready", "value": 3 }
+      ]
+    },
+    {
+      "name": "iter_boundary",
+      "type": "basic",
+      "signal": "cov_iter",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "iter_zero", "value": 0 },
+        { "name": "iter_one", "value": 1 },
+        { "name": "iter_upper_m1", "value": 33 },
+        { "name": "iter_upper", "value": 34 }
+      ]
+    },
+    {
+      "name": "op_tier",
+      "type": "basic",
+      "signal": "cov_state",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "op_div", "value": 1 },
+        { "name": "op_sqrt", "value": 2 }
+      ]
+    },
+    {
+      "name": "quotient_boundary",
+      "type": "basic",
+      "signal": "cov_quotient",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "q_zero", "value": 0 },
+        { "name": "q_one", "value": 1 },
+        { "name": "q_upper_m1", "value": 65534 },
+        { "name": "q_allones", "value": 65535 }
+      ]
+    },
+    {
+      "name": "root_boundary",
+      "type": "basic",
+      "signal": "cov_root",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "r_zero", "value": 0 },
+        { "name": "r_one", "value": 1 },
+        { "name": "r_upper_m1", "value": 65534 },
+        { "name": "r_allones", "value": 65535 }
+      ]
+    },
+    {
+      "name": "rem_boundary",
+      "type": "basic",
+      "signal": "cov_remainder",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "m_zero", "value": 0 },
+        { "name": "m_allones", "value": 65535 }
+      ]
+    },
+    {
+      "name": "opnd_a_boundary",
+      "type": "boundary",
+      "signal": "cov_opnd_a",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "a_zero", "value": 0, "mask": 255 },
+        { "name": "a_one", "value": 1, "mask": 255 },
+        { "name": "a_upper_m1", "value": 254, "mask": 255 },
+        { "name": "a_allones", "value": 255, "mask": 255 }
+      ]
+    },
+    {
+      "name": "opnd_b_boundary",
+      "type": "boundary",
+      "signal": "cov_opnd_b",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "b_zero", "value": 0, "mask": 255 },
+        { "name": "b_one", "value": 1, "mask": 255 },
+        { "name": "b_upper_m1", "value": 254, "mask": 255 },
+        { "name": "b_allones", "value": 255, "mask": 255 }
+      ]
+    },
+    {
+      "name": "opnd_c_boundary",
+      "type": "boundary",
+      "signal": "cov_opnd_c",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "c_zero", "value": 0, "mask": 255 },
+        { "name": "c_one", "value": 1, "mask": 255 },
+        { "name": "c_upper_m1", "value": 254, "mask": 255 },
+        { "name": "c_allones", "value": 255, "mask": 255 }
+      ]
+    },
+    {
+      "name": "busy_state",
+      "type": "condition",
+      "signal": "cov_busy",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "busy_off", "value": 0 },
+        { "name": "busy_on", "value": 1 }
+      ]
+    },
+    {
+      "name": "done_state",
+      "type": "condition",
+      "signal": "cov_done",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "done_off", "value": 0 },
+        { "name": "done_on", "value": 1 }
+      ]
+    },
+    {
+      "name": "hold_state",
+      "type": "condition",
+      "signal": "cov_hold",
+      "source": "top",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "hold_off", "value": 0 },
+        { "name": "hold_on", "value": 1 }
+      ]
+    },
+    {
+      "name": "cfg_accept",
+      "type": "condition",
+      "signal": "cov_cfg_ok",
+      "source": "top",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "cfg_acc", "value": 1 },
+        { "name": "cfg_rej", "value": 2 }
+      ]
+    },
+    {
+      "name": "done_ok_valid_state",
+      "type": "condition",
+      "signal": "cov_done_ok_valid",
+      "source": "top",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "dok_off", "value": 0 },
+        { "name": "dok_on", "value": 1 }
+      ]
+    },
+    {
+      "name": "done_ok_class",
+      "type": "temporal",
+      "signal": "cov_done_ok_class",
+      "valid_signal": "cov_done_ok_valid",
+      "source": "top",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "done_ok_0", "value": 0 },
+        { "name": "done_ok_1", "value": 1 },
+        { "name": "done_ok_2", "value": 2 },
+        { "name": "done_ok_3", "value": 3 }
+      ]
+    },
+    {
+      "name": "iter_x_op",
+      "type": "cross",
+      "signal": "cov_iter,cov_state",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "i0_div", "cross": [0, 1] },
+        { "name": "i0_sqrt", "cross": [0, 2] },
+        { "name": "i33_div", "cross": [33, 1] },
+        { "name": "i16_sqrt", "cross": [16, 2] },
+        { "name": "i34_div", "cross": [34, 1] }
+      ]
+    },
+    {
+      "name": "done_ok_x_a",
+      "type": "cross",
+      "signal": "cov_done_ok_valid,cov_opnd_a",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "ok_a1", "cross": [1, 1] },
+        { "name": "ok_a2", "cross": [1, 2] },
+        { "name": "ok_a254", "cross": [1, 254] },
+        { "name": "ok_a255", "cross": [1, 255] }
+      ]
+    },
+    {
+      "name": "hold_x_state",
+      "type": "cross",
+      "signal": "cov_hold,cov_state",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "hold_idle", "cross": [1, 0] },
+        { "name": "hold_ready", "cross": [1, 3] }
+      ]
+    },
+    {
+      "name": "busy_x_done",
+      "type": "cross",
+      "signal": "cov_busy,cov_done",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "b0d0", "cross": [0, 0] },
+        { "name": "b1d0", "cross": [1, 0] },
+        { "name": "b0d1", "cross": [0, 1] }
+      ]
+    },
+    {
+      "name": "state_x_done",
+      "type": "cross",
+      "signal": "cov_state,cov_done",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "ready_done", "cross": [3, 1] },
+        { "name": "div_busy", "cross": [1, 0] },
+        { "name": "sqrt_busy", "cross": [2, 0] }
+      ]
+    },
+    {
+      "name": "opnd_pair",
+      "type": "cross",
+      "signal": "cov_opnd_a,cov_opnd_b",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "a0b0", "cross": [0, 0], "masks": [255, 255] },
+        { "name": "affbff", "cross": [255, 255], "masks": [255, 255] }
+      ]
+    },
+    {
+      "name": "q_root_pair",
+      "type": "cross",
+      "signal": "cov_quotient,cov_root",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "q0r0", "cross": [0, 0] },
+        { "name": "qffrff", "cross": [65535, 65535] }
+      ]
+    },
+    {
+      "name": "seq_full_div",
+      "type": "seq_hit",
+      "seq": "cov_seq1",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_full_sqrt",
+      "type": "seq_hit",
+      "seq": "cov_seq2",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_div_repeat",
+      "type": "seq_hit",
+      "seq": "cov_seq3",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_div_sqrt_switch",
+      "type": "seq_hit",
+      "seq": "cov_seq4",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_hold_persist",
+      "type": "seq_hit",
+      "seq": "cov_seq5",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_hold_then_ok",
+      "type": "seq_hit",
+      "seq": "cov_seq6",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_div_long",
+      "type": "seq_hit",
+      "seq": "cov_seq7",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_div_short",
+      "type": "seq_hit",
+      "seq": "cov_seq8",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_idle_stable",
+      "type": "seq_hit",
+      "seq": "cov_seq9",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_fast_done",
+      "type": "seq_hit",
+      "seq": "cov_seq10",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_div_dbz",
+      "type": "seq_hit",
+      "seq": "cov_seq11",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_done_consistent",
+      "type": "seq_hit",
+      "seq": "cov_seq12",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "ds_hold_window_max",
+      "type": "deep",
+      "signal": "cov_hold",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "hold_window_hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "ds_done_ok_class_switch",
+      "type": "deep",
+      "signal": "cov_done_ok_class,cov_done_ok_valid",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "class_switch_hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "ds_opnd_diversity",
+      "type": "deep",
+      "signal": "cov_opnd_a,cov_state",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "opnd_div_hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "dataflow_busy_streak",
+      "type": "sva",
+      "signal": "cov_busy",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "busy2", "value": 1, "directive": "a_df_busy2" },
+        { "name": "busy4", "value": 1, "directive": "a_df_busy4" },
+        { "name": "busy8", "value": 1, "directive": "a_df_busy8" }
+      ]
+    },
+    {
+      "name": "timing_iter_reach",
+      "type": "sva",
+      "signal": "cov_iter",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "iter1", "value": 1, "directive": "a_tp_iter1" },
+        { "name": "iter8", "value": 1, "directive": "a_tp_iter8" },
+        { "name": "iter16", "value": 1, "directive": "a_tp_iter16" }
+      ]
+    },
+    {
+      "name": "timing_hold_dwell",
+      "type": "sva",
+      "signal": "cov_hold",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "hold4", "value": 1, "directive": "a_tp_hold4" },
+        { "name": "holdfull", "value": 1, "directive": "a_tp_holdfull" }
+      ]
+    },
+    {
+      "name": "timing_idle_dwell",
+      "type": "sva",
+      "signal": "cov_busy,cov_hold",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "idle4", "value": 1, "directive": "a_tp_idle4" },
+        { "name": "idle16", "value": 1, "directive": "a_tp_idle16" }
+      ]
+    }
+  ]
+}

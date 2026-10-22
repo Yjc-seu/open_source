@@ -180,11 +180,12 @@ action = [cmd_code, cmd_valid, data, sda_in, cfg_wr, cfg_sel, cfg_d0, cfg_d1,
 > `assert_cov.svh` 以参数化 `cover property` 给出，`coverage_simulator.py` /
 > `covergroup.svh` 以等价的跨周期 tracker 实现。
 
-**可达性**：114 个 bin 中 101 个在公开占位参数下可达（基本/条件/边界/交叉
-非 hold 项、全部 10 条非 hold 序列、Q15、sva 中除 `holdfull` 外全部）。
-13 个 bin 依赖隐藏正确地址集（addr_ok class 4、hold 条件 1、prescale×hold
-hold 项 3、Q5/Q6 2、Q13/Q14 2、holdfull 1），占位参数下惰性、注入真值后
-可达——与官方"隐藏正确子集"玩法一致。随机基线约 20%，具备充分区分度。
+**可达性**：114 个 bin 中 100 个在公开占位参数下可达（基本/条件/边界/交叉
+非 hold 项、全部 10 条非 hold 序列、Q15、sva 中除 `hold4`/`holdfull` 外全部）。
+14 个 bin 依赖隐藏正确地址集（addr_ok class 4、hold 条件 1、prescale×hold
+hold 项 3、Q5/Q6 2、Q13/Q14 2、hold4 与 holdfull 2），占位参数下惰性、注入
+真值后可达——与官方"隐藏正确子集"玩法一致。随机基线约 20%，具备充分区分度。
+全部 114 bin 的可达性已由 `verify_all_bins.py` 实测验证（注入真值后 100%）。
 
 ## 6. 本地可见性分界
 
@@ -198,5 +199,6 @@ hold 项 3、Q5/Q6 2、Q13/Q14 2、holdfull 1），占位参数下惰性、注�
 
 **版本**：v1.0
 **状态**：已完成；上游核心为 alexforencich/verilog-i2c（MIT），顶层封装、
-观测总线与覆盖定义为本题原创。全部非隐藏项经静态可达性推演确认；RTL 与
-local_sim 为同一设计的双实现（周期精确镜像）。
+观测总线与覆盖定义为本题原创。全部 114 bin 可达性经 `verify_all_bins.py`
+实测验证（注入真值后 100%）；RTL 与 local_sim 为同一设计的双实现（周期精确
+镜像，`cross_check.py` 20000 拍对拍 0 失配）。

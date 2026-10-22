@@ -56,7 +56,7 @@ alexforencich/verilog-uart（MIT 许可）的 AXI-stream 收发器（`uart_tx.v`
 |------|------|
 | `cov_tx_state` / `cov_rx_state` | 收发影子机状态 0=IDLE 1=START 2=DATA 3=STOP |
 | `cov_busy` | TX 或 RX 任一方向忙碌（1=busy） |
-| `cov_overrun` / `cov_frame_err` | RX 溢出 / 帧错误单拍脉冲 |
+| `cov_overrun` / `cov_frame_err` | RX 溢出 / 帧错误单拍脉冲（与影子机 `cov_rx_state == STOP` 同拍对齐，保证 `fe_x_rx_state` / `ov_x_rx_state` 交叉 bin 可达） |
 | `cov_prescale` | 当前配置的 prescale（16 位） |
 | `cov_tx_byte` / `cov_rx_byte` | 最近发送字节 / 最近接收（消费）字节 |
 | `cov_hold` | hold 驻留窗口进行中 |

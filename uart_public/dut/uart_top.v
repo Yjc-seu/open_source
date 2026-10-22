@@ -55,8 +55,8 @@ module uart_top #(
     output reg  [1:0]       cov_tx_state,
     output reg  [1:0]       cov_rx_state,
     output wire             cov_busy,
-    output reg              cov_overrun,
-    output reg              cov_frame_err,
+    output wire             cov_overrun,
+    output wire             cov_frame_err,
     output wire [15:0]      cov_prescale,
     output reg  [7:0]       cov_tx_byte,
     output reg  [7:0]       cov_rx_byte,
@@ -156,6 +156,13 @@ module uart_top #(
     assign cov_pending  = tx_pending;
     assign cov_loopback = loopback_en;
     assign cov_tready   = tx_ready;
+    // 错误观测与 RX STOP 窗口同拍对齐：上游 uart_rx 的 overrun_error /
+    // frame_error 是寄存输出，其脉冲恰落在影子机 cov_rx_state==RX_STOP 的
+    // 那一拍；若再寄存一拍（旧实现）会把脉冲推到 STOP 之后，使
+    // fe_x_rx_state/ov_x_rx_state（fe/ov == 1 且 rx_state == STOP）永远
+    // 不可达。这里直接组合观测核心脉冲，保证错误与 STOP 窗口同拍。
+    assign cov_overrun   = rx_core_overrun;
+    assign cov_frame_err = rx_core_frame_err;
 
     // ------------------------------------------------------------------
     // TX 状态影子机（镜像 uart_tx 内部时序，仅用于观测）
@@ -234,8 +241,6 @@ module uart_top #(
             rxd_s            <= 1'b1;
             rx_state_prev    <= RX_IDLE;
             cov_rx_state     <= RX_IDLE;
-            cov_overrun      <= 1'b0;
-            cov_frame_err    <= 1'b0;
             cov_tx_byte      <= 8'd0;
             cov_rx_byte      <= 8'd0;
             hld_state        <= 2'd0;
@@ -306,8 +311,7 @@ module uart_top #(
             // ---- RX 影子机（镜像 uart_rx 内部状态）----
             rxd_s <= rxd_in;
             rx_state_prev <= cov_rx_state;
-            cov_overrun   <= rx_core_overrun;
-            cov_frame_err <= rx_core_frame_err;
+            // cov_overrun / cov_frame_err 为组合观测（见上），不再在此寄存。
             if (rs_prescale > 0) begin
                 rs_prescale <= rs_prescale - 1;
             end else if (rs_bit > 4'd0) begin

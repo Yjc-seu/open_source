@@ -1,0 +1,462 @@
+{
+  "dut_name": "aes_public",
+  "version": "v1.0",
+  "total_bins": 94,
+  "coverpoints": [
+    {
+      "name": "state",
+      "type": "basic",
+      "signal": "cov_state",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "s_idle", "value": 0 },
+        { "name": "s_keyload", "value": 1 },
+        { "name": "s_blockload", "value": 2 },
+        { "name": "s_round", "value": 3 },
+        { "name": "s_ready", "value": 4 }
+      ]
+    },
+    {
+      "name": "keylen",
+      "type": "basic",
+      "signal": "cov_keylen",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "k_128a", "value": 0 },
+        { "name": "k_alias1", "value": 1 },
+        { "name": "k_256a", "value": 2 },
+        { "name": "k_alias3", "value": 3 }
+      ]
+    },
+    {
+      "name": "round",
+      "type": "basic",
+      "signal": "cov_round",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "r0", "value": 0 },
+        { "name": "r1", "value": 1 },
+        { "name": "r10", "value": 10 },
+        { "name": "r14", "value": 14 }
+      ]
+    },
+    {
+      "name": "block_cnt",
+      "type": "basic",
+      "signal": "cov_block_cnt",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "bc0", "value": 0 },
+        { "name": "bc1", "value": 1 },
+        { "name": "bc254", "value": 254 },
+        { "name": "bc255", "value": 255 }
+      ]
+    },
+    {
+      "name": "key_byte_boundary",
+      "type": "boundary",
+      "signal": "cov_key_byte",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "kb_zero", "value": 0 },
+        { "name": "kb_one", "value": 1 },
+        { "name": "kb_upper_m1", "value": 254 },
+        { "name": "kb_allones", "value": 255 }
+      ]
+    },
+    {
+      "name": "block_byte_boundary",
+      "type": "boundary",
+      "signal": "cov_block_byte",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "bb_zero", "value": 0 },
+        { "name": "bb_one", "value": 1 },
+        { "name": "bb_upper_m1", "value": 254 },
+        { "name": "bb_allones", "value": 255 }
+      ]
+    },
+    {
+      "name": "round_boundary",
+      "type": "boundary",
+      "signal": "cov_round",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "rb0", "value": 0 },
+        { "name": "rb1", "value": 1 },
+        { "name": "rb13", "value": 13 },
+        { "name": "rb14", "value": 14 }
+      ]
+    },
+    {
+      "name": "encdec_mode",
+      "type": "condition",
+      "signal": "cov_encdec",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "dec", "value": 0 },
+        { "name": "enc", "value": 1 }
+      ]
+    },
+    {
+      "name": "busy_state",
+      "type": "condition",
+      "signal": "cov_busy",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "busy_off", "value": 0 },
+        { "name": "busy_on", "value": 1 }
+      ]
+    },
+    {
+      "name": "result_valid_state",
+      "type": "condition",
+      "signal": "cov_result_valid",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "rv_off", "value": 0 },
+        { "name": "rv_on", "value": 1 }
+      ]
+    },
+    {
+      "name": "cfg_accept_state",
+      "type": "condition",
+      "signal": "cov_cfg_accept",
+      "source": "top",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "acc_off", "value": 0 },
+        { "name": "acc_on", "value": 1 }
+      ]
+    },
+    {
+      "name": "hold_state",
+      "type": "condition",
+      "signal": "cov_hold",
+      "source": "top",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "hold_off", "value": 0 },
+        { "name": "hold_on", "value": 1 }
+      ]
+    },
+    {
+      "name": "done_ok_class",
+      "type": "temporal",
+      "signal": "cov_done_ok_class",
+      "valid_signal": "cov_done_ok_valid",
+      "source": "top",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "done_ok_0", "value": 0 },
+        { "name": "done_ok_1", "value": 1 },
+        { "name": "done_ok_2", "value": 2 },
+        { "name": "done_ok_3", "value": 3 }
+      ]
+    },
+    {
+      "name": "state_x_encdec",
+      "type": "cross",
+      "signal": "cov_state,cov_encdec",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "idle_enc", "cross": [0, 1] },
+        { "name": "idle_dec", "cross": [0, 0] },
+        { "name": "round_enc", "cross": [3, 1] },
+        { "name": "round_dec", "cross": [3, 0] }
+      ]
+    },
+    {
+      "name": "round_x_keylen",
+      "type": "cross",
+      "signal": "cov_round,cov_keylen",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "r1_k0", "cross": [1, 0] },
+        { "name": "r10_k0", "cross": [10, 0] },
+        { "name": "r14_k2", "cross": [14, 2] },
+        { "name": "r13_k3", "cross": [13, 3] }
+      ]
+    },
+    {
+      "name": "done_ok_x_keylen",
+      "type": "cross",
+      "signal": "cov_done_ok_class,cov_keylen",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "c0_k0", "cross": [0, 0] },
+        { "name": "c1_k1", "cross": [1, 1] },
+        { "name": "c2_k2", "cross": [2, 2] },
+        { "name": "c3_k3", "cross": [3, 3] }
+      ]
+    },
+    {
+      "name": "hold_x_keylen",
+      "type": "cross",
+      "signal": "cov_hold,cov_keylen",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "h_k0", "cross": [1, 0] },
+        { "name": "h_k2", "cross": [1, 2] }
+      ]
+    },
+    {
+      "name": "state_x_result_valid",
+      "type": "cross",
+      "signal": "cov_state,cov_result_valid",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "ready_rv", "cross": [4, 1] },
+        { "name": "idle_rv", "cross": [0, 1] }
+      ]
+    },
+    {
+      "name": "busy_x_encdec",
+      "type": "cross",
+      "signal": "cov_busy,cov_encdec",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "busy_enc", "cross": [1, 1] },
+        { "name": "busy_dec", "cross": [1, 0] },
+        { "name": "idle_enc", "cross": [0, 1] },
+        { "name": "idle_dec", "cross": [0, 0] }
+      ]
+    },
+    {
+      "name": "cfg_accept_x_state",
+      "type": "cross",
+      "signal": "cov_cfg_accept,cov_state",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "acc_idle", "cross": [1, 0] },
+        { "name": "rej_busy", "cross": [0, 1] }
+      ]
+    },
+    {
+      "name": "keylen_x_encdec",
+      "type": "cross",
+      "signal": "cov_keylen,cov_encdec",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "k0_enc", "cross": [0, 1] },
+        { "name": "k0_dec", "cross": [0, 0] },
+        { "name": "k2_enc", "cross": [2, 1] },
+        { "name": "k2_dec", "cross": [2, 0] }
+      ]
+    },
+    {
+      "name": "seq_full_lifecycle",
+      "type": "seq_hit",
+      "seq": "cov_seq1",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_back_to_back",
+      "type": "seq_hit",
+      "seq": "cov_seq2",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_hold_persist",
+      "type": "seq_hit",
+      "seq": "cov_seq3",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_hold_then_ok",
+      "type": "seq_hit",
+      "seq": "cov_seq4",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_keyload_rounds",
+      "type": "seq_hit",
+      "seq": "cov_seq5",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_restart_after_ready",
+      "type": "seq_hit",
+      "seq": "cov_seq6",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_double_block",
+      "type": "seq_hit",
+      "seq": "cov_seq7",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_idle_stable",
+      "type": "seq_hit",
+      "seq": "cov_seq8",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_fast_done",
+      "type": "seq_hit",
+      "seq": "cov_seq9",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_encdec_switch",
+      "type": "seq_hit",
+      "seq": "cov_seq10",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_keylen_switch",
+      "type": "seq_hit",
+      "seq": "cov_seq11",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_done_consistency",
+      "type": "seq_hit",
+      "seq": "cov_seq12",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "ds_hold_window_max",
+      "type": "deep",
+      "signal": "cov_hold",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "hold_window_hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "ds_done_class_switch",
+      "type": "deep",
+      "signal": "cov_done_ok_class,cov_done_ok_valid",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "class_switch_hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "ds_keylen_diversity",
+      "type": "deep",
+      "signal": "cov_state,cov_keylen",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "keylen_div_hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "dataflow_busy_streak",
+      "type": "sva",
+      "signal": "cov_busy",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "busy2", "value": 1, "directive": "a_df_busy2" },
+        { "name": "busy4", "value": 1, "directive": "a_df_busy4" },
+        { "name": "busy8", "value": 1, "directive": "a_df_busy8" }
+      ]
+    },
+    {
+      "name": "timing_round_dwell",
+      "type": "sva",
+      "signal": "cov_state",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "rd1", "value": 1, "directive": "a_tp_rd1" },
+        { "name": "rd8", "value": 1, "directive": "a_tp_rd8" },
+        { "name": "rd16", "value": 1, "directive": "a_tp_rd16" }
+      ]
+    },
+    {
+      "name": "timing_hold_dwell",
+      "type": "sva",
+      "signal": "cov_hold",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "hold4", "value": 1, "directive": "a_tp_hold4" },
+        { "name": "holdfull", "value": 1, "directive": "a_tp_holdfull" }
+      ]
+    },
+    {
+      "name": "timing_idle_dwell",
+      "type": "sva",
+      "signal": "cov_state,cov_hold",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "idle4", "value": 1, "directive": "a_tp_idle4" },
+        { "name": "idle16", "value": 1, "directive": "a_tp_idle16" }
+      ]
+    }
+  ]
+}

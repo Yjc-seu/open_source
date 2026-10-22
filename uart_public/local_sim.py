@@ -135,7 +135,6 @@ class UartPublic:
         self._s10_cnt = 0
         self._s11_rx_ok = False
         self._frame_err_d = 0
-        self._overrun_d = 0
 
     # ------------------------------------------------------------------
     # Per-cycle event recording (official model: record before step)
@@ -297,11 +296,13 @@ class UartPublic:
             self.cov_rx_byte = self.rx_tdata
         self.rxd_s = 1 if rxd_in else 0
 
-        # cov_overrun / cov_frame_err 是寄存输出（RTL: <= rx_core_overrun /
-        # rx_core_frame_err），滞后核心脉冲一拍。
-        self.cov_overrun = 1 if self._overrun_d else 0
-        self.cov_frame_err = 1 if self._frame_err_d else 0
-        self._overrun_d = core_overrun
+        # cov_overrun / cov_frame_err：与 RTL 一致，组合观测核心寄存脉冲
+        # （脉冲恰落在 cov_rx_state == RX_STOP 的那一拍，使 fe_x_rx_state /
+        # ov_x_rx_state 交叉 bin 可达）。_frame_err_d 保留 1 拍延迟副本，
+        # 供 Q3 时序监视器的 frame_err_pre 使用（RTL 监视器直接采样
+        # rx_core_frame_err，等价于该延迟副本）。
+        self.cov_overrun = 1 if core_overrun else 0
+        self.cov_frame_err = 1 if core_frame_err else 0
         self._frame_err_d = core_frame_err
 
         # rx_done：与 RTL 组合逻辑一致——上一拍非 STOP 且本拍（更新后）进入 STOP。

@@ -72,8 +72,6 @@ void Vuart_top::_settle__TOP__3(Vuart_top__Syms* __restrict vlSymsp) {
     vlTOPp->cov_loopback = vlTOPp->loopback_en;
     vlTOPp->cov_tready = vlTOPp->tx_ready;
     vlTOPp->uart_top__DOT__clk = vlTOPp->clk;
-    vlTOPp->uart_top__DOT__cov_overrun = vlTOPp->cov_overrun;
-    vlTOPp->uart_top__DOT__cov_frame_err = vlTOPp->cov_frame_err;
     vlTOPp->uart_top__DOT__cov_seq2 = vlTOPp->cov_seq2;
     vlTOPp->uart_top__DOT__cov_seq3 = vlTOPp->cov_seq3;
     vlTOPp->uart_top__DOT__cov_seq6 = vlTOPp->cov_seq6;
@@ -162,7 +160,9 @@ void Vuart_top::_settle__TOP__3(Vuart_top__Syms* __restrict vlSymsp) {
         = vlTOPp->uart_top__DOT__rx_core_tdata;
     vlTOPp->uart_top__DOT__u_rx__DOT__overrun_error 
         = vlTOPp->uart_top__DOT__rx_core_overrun;
+    vlTOPp->cov_overrun = vlTOPp->uart_top__DOT__rx_core_overrun;
     vlTOPp->uart_top__DOT__u_rx__DOT__frame_error = vlTOPp->uart_top__DOT__rx_core_frame_err;
+    vlTOPp->cov_frame_err = vlTOPp->uart_top__DOT__rx_core_frame_err;
     vlTOPp->uart_top__DOT__u_tx__DOT__txd = vlTOPp->uart_top__DOT__tx_core_txd;
     vlTOPp->uart_top__DOT__rxd_in = ((IData)(vlTOPp->loopback_en)
                                       ? (IData)(vlTOPp->uart_top__DOT__tx_core_txd)
@@ -190,6 +190,8 @@ void Vuart_top::_settle__TOP__3(Vuart_top__Syms* __restrict vlSymsp) {
                                        & (IData)(vlTOPp->tx_ready)) 
                                       & (IData)(vlTOPp->uart_top__DOT__tx_core_tready)) 
                                      & (~ (IData)(vlTOPp->cov_hold)));
+    vlTOPp->uart_top__DOT__cov_overrun = vlTOPp->cov_overrun;
+    vlTOPp->uart_top__DOT__cov_frame_err = vlTOPp->cov_frame_err;
     vlTOPp->uart_top__DOT__u_rx__DOT__rxd = vlTOPp->uart_top__DOT__rxd_in;
     vlTOPp->uart_top__DOT__cov_busy = vlTOPp->cov_busy;
     vlTOPp->uart_top__DOT__idle_all = (1U & (((~ (IData)(vlTOPp->cov_busy)) 
@@ -381,7 +383,6 @@ void Vuart_top::_ctor_var_reset() {
     uart_top__DOT__u_rx__DOT__data_reg = VL_RAND_RESET_I(8);
     uart_top__DOT__u_rx__DOT__prescale_reg = VL_RAND_RESET_I(19);
     uart_top__DOT__u_rx__DOT__bit_cnt = VL_RAND_RESET_I(4);
-    __Vdly__cov_tx_state = VL_RAND_RESET_I(2);
     __Vdly__uart_top__DOT__hld_class = VL_RAND_RESET_I(2);
     __Vdly__uart_top__DOT__hld_state = VL_RAND_RESET_I(2);
     __Vdly__uart_top__DOT__hld_cnt = VL_RAND_RESET_I(16);
@@ -389,6 +390,7 @@ void Vuart_top::_ctor_var_reset() {
     __Vdly__uart_top__DOT__s1_send = VL_RAND_RESET_I(1);
     __Vdly__uart_top__DOT__s1_accept = VL_RAND_RESET_I(1);
     __Vdly__uart_top__DOT__s4_cnt = VL_RAND_RESET_I(16);
+    __Vdly__cov_tx_state = VL_RAND_RESET_I(2);
     { int __Vi0=0; for (; __Vi0<1; ++__Vi0) {
             __Vm_traceActivity[__Vi0] = VL_RAND_RESET_I(1);
     }}

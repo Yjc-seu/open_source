@@ -190,12 +190,12 @@ VL_MODULE(Vuart_top) {
     
     // LOCAL VARIABLES
     // Internals; generally not touched by application code
-    CData/*1:0*/ __Vdly__cov_tx_state;
     CData/*1:0*/ __Vdly__uart_top__DOT__hld_class;
     CData/*1:0*/ __Vdly__uart_top__DOT__hld_state;
     CData/*0:0*/ __Vdly__uart_top__DOT__s1_cfg;
     CData/*0:0*/ __Vdly__uart_top__DOT__s1_send;
     CData/*0:0*/ __Vdly__uart_top__DOT__s1_accept;
+    CData/*1:0*/ __Vdly__cov_tx_state;
     CData/*0:0*/ __Vclklast__TOP__clk;
     CData/*0:0*/ __Vclklast__TOP__rst_n;
     SData/*15:0*/ __Vdly__uart_top__DOT__hld_cnt;
