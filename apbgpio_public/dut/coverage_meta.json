@@ -1,0 +1,502 @@
+{
+  "dut_name": "apbgpio_public",
+  "version": "v1.0",
+  "total_bins": 94,
+  "coverpoints": [
+    {
+      "name": "dir_tier",
+      "type": "basic",
+      "signal": "cov_dir",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "dir_all_in", "value": 0 },
+        { "name": "dir_all_out", "value": 4294967295 },
+        { "name": "dir_mix_low", "value": 255 },
+        { "name": "dir_mix_half", "value": 65535 }
+      ]
+    },
+    {
+      "name": "out_tier",
+      "type": "basic",
+      "signal": "cov_out",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "out_zero", "value": 0 },
+        { "name": "out_min", "value": 1 },
+        { "name": "out_mid", "value": 85 },
+        { "name": "out_max", "value": 255 }
+      ]
+    },
+    {
+      "name": "in_tier",
+      "type": "basic",
+      "signal": "cov_in",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "in_zero", "value": 0 },
+        { "name": "in_min", "value": 1 },
+        { "name": "in_mid", "value": 85 },
+        { "name": "in_max", "value": 255 }
+      ]
+    },
+    {
+      "name": "int_en_level",
+      "type": "basic",
+      "signal": "cov_int_en",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "en_off", "value": 0 },
+        { "name": "en_on", "value": 4294967295 }
+      ]
+    },
+    {
+      "name": "int_status_level",
+      "type": "basic",
+      "signal": "cov_int_status",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "st_off", "value": 0 },
+        { "name": "st_on", "value": 1 }
+      ]
+    },
+    {
+      "name": "padcfg_tier",
+      "type": "basic",
+      "signal": "cov_padcfg_lo",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "cfg_zero", "value": 0 },
+        { "name": "cfg_min", "value": 1 },
+        { "name": "cfg_mid", "value": 8 },
+        { "name": "cfg_max", "value": 15 }
+      ]
+    },
+    {
+      "name": "out_low_boundary",
+      "type": "boundary",
+      "signal": "cov_out",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "outb_zero", "value": 0 },
+        { "name": "outb_one", "value": 1 },
+        { "name": "outb_upper_m1", "value": 254 },
+        { "name": "outb_allones", "value": 255 }
+      ]
+    },
+    {
+      "name": "in_low_boundary",
+      "type": "boundary",
+      "signal": "cov_in",
+      "source": "top",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "inb_zero", "value": 0 },
+        { "name": "inb_one", "value": 1 },
+        { "name": "inb_upper_m1", "value": 254 },
+        { "name": "inb_allones", "value": 255 }
+      ]
+    },
+    {
+      "name": "addr_boundary",
+      "type": "boundary",
+      "signal": "cov_addr",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "a00", "value": 0 },
+        { "name": "a01", "value": 1 },
+        { "name": "a0d", "value": 13 },
+        { "name": "a1f", "value": 31 }
+      ]
+    },
+    {
+      "name": "int_set_pulse",
+      "type": "condition",
+      "signal": "cov_int_set",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "set_off", "value": 0 },
+        { "name": "set_on", "value": 1 }
+      ]
+    },
+    {
+      "name": "int_clr_pulse",
+      "type": "condition",
+      "signal": "cov_int_clr",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "clr_off", "value": 0 },
+        { "name": "clr_on", "value": 1 }
+      ]
+    },
+    {
+      "name": "in_change_pulse",
+      "type": "condition",
+      "signal": "cov_in_change",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "chg_off", "value": 0 },
+        { "name": "chg_on", "value": 1 }
+      ]
+    },
+    {
+      "name": "wr_ok_state",
+      "type": "condition",
+      "signal": "cov_wr_ok",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "wr_off", "value": 0 },
+        { "name": "wr_on", "value": 1 }
+      ]
+    },
+    {
+      "name": "hold_state",
+      "type": "condition",
+      "signal": "cov_hold",
+      "source": "top",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "hold_off", "value": 0 },
+        { "name": "hold_on", "value": 1 }
+      ]
+    },
+    {
+      "name": "done_ok_class",
+      "type": "temporal",
+      "signal": "cov_done_ok_class",
+      "valid_signal": "cov_done_ok_valid",
+      "source": "top",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "done_ok_0", "value": 0 },
+        { "name": "done_ok_1", "value": 1 },
+        { "name": "done_ok_2", "value": 2 },
+        { "name": "done_ok_3", "value": 3 }
+      ]
+    },
+    {
+      "name": "dir_x_out",
+      "type": "cross",
+      "signal": "cov_dir,cov_out",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "allout_00", "cross": [4294967295, 0] },
+        { "name": "allout_ff", "cross": [4294967295, 255] },
+        { "name": "mix_55", "cross": [65535, 85] }
+      ]
+    },
+    {
+      "name": "int_en_x_status",
+      "type": "cross",
+      "signal": "cov_int_en,cov_int_status",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "en0_st0", "cross": [0, 0] },
+        { "name": "en1_st0", "cross": [4294967295, 0] },
+        { "name": "en1_st1", "cross": [4294967295, 1] },
+        { "name": "en0_st1", "cross": [0, 1] }
+      ]
+    },
+    {
+      "name": "in_x_out",
+      "type": "cross",
+      "signal": "cov_in,cov_out",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "pair_00", "cross": [0, 0] },
+        { "name": "pair_55", "cross": [85, 85] },
+        { "name": "pair_ff", "cross": [255, 255] }
+      ]
+    },
+    {
+      "name": "addr_x_wr_ok",
+      "type": "cross",
+      "signal": "cov_addr,cov_wr_ok",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "a03_ok", "cross": [3, 1] },
+        { "name": "a09_ok", "cross": [9, 1] },
+        { "name": "a1f_ok", "cross": [31, 1] },
+        { "name": "a03_rej", "cross": [3, 0] }
+      ]
+    },
+    {
+      "name": "hold_x_wr_ok",
+      "type": "cross",
+      "signal": "cov_hold,cov_wr_ok",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "h0_w0", "cross": [0, 0] },
+        { "name": "h0_w1", "cross": [0, 1] },
+        { "name": "h1_w0", "cross": [1, 0] },
+        { "name": "h1_w1", "cross": [1, 1] }
+      ]
+    },
+    {
+      "name": "int_en_x_hold",
+      "type": "cross",
+      "signal": "cov_int_en,cov_hold",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "en1_hold", "cross": [4294967295, 1] }
+      ]
+    },
+    {
+      "name": "seq_cfg_lifecycle",
+      "type": "seq_hit",
+      "seq": "cov_seq1",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_dir_switch",
+      "type": "seq_hit",
+      "seq": "cov_seq2",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_int_lifecycle",
+      "type": "seq_hit",
+      "seq": "cov_seq3",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_hold_persist",
+      "type": "seq_hit",
+      "seq": "cov_seq4",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_hold_then_ok",
+      "type": "seq_hit",
+      "seq": "cov_seq5",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_cfg_streak",
+      "type": "seq_hit",
+      "seq": "cov_seq6",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_rd_streak",
+      "type": "seq_hit",
+      "seq": "cov_seq7",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_idle_stable",
+      "type": "seq_hit",
+      "seq": "cov_seq8",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_quick_done",
+      "type": "seq_hit",
+      "seq": "cov_seq9",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_loopback_consistent",
+      "type": "seq_hit",
+      "seq": "cov_seq10",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_multimode",
+      "type": "seq_hit",
+      "seq": "cov_seq11",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_done_consistent",
+      "type": "seq_hit",
+      "seq": "cov_seq12",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "ds_hold_window_max",
+      "type": "deep",
+      "signal": "cov_hold",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "hold_window_hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "ds_class_switch",
+      "type": "deep",
+      "signal": "cov_done_ok_class,cov_done_ok_valid",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "class_switch_hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "ds_out_diversity",
+      "type": "deep",
+      "signal": "cov_out,cov_wr_ok,cov_addr",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "out_div_hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "dataflow_wr_streak",
+      "type": "sva",
+      "signal": "cov_wr_ok",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "wr2", "value": 1, "directive": "a_df_wr2" },
+        { "name": "wr4", "value": 1, "directive": "a_df_wr4" },
+        { "name": "wr8", "value": 1, "directive": "a_df_wr8" }
+      ]
+    },
+    {
+      "name": "timing_active_dwell",
+      "type": "sva",
+      "signal": "cov_wr_ok,cov_hold,cov_done_ok_valid",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "act1", "value": 1, "directive": "a_tp_act1" },
+        { "name": "act8", "value": 1, "directive": "a_tp_act8" },
+        { "name": "act16", "value": 1, "directive": "a_tp_act16" }
+      ]
+    },
+    {
+      "name": "timing_hold_dwell",
+      "type": "sva",
+      "signal": "cov_hold",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "hold4", "value": 1, "directive": "a_tp_hold4" },
+        { "name": "holdfull", "value": 1, "directive": "a_tp_holdfull" }
+      ]
+    },
+    {
+      "name": "timing_idle_dwell",
+      "type": "sva",
+      "signal": "cov_wr_ok,cov_hold,cov_done_ok_valid,cov_int_status",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "idle4", "value": 1, "directive": "a_tp_idle4" },
+        { "name": "idle16", "value": 1, "directive": "a_tp_idle16" }
+      ]
+    },
+    {
+      "name": "assert_multi_hold",
+      "type": "sva",
+      "directive": "a_multi_hold",
+      "signal": "cov_hold",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "multi_hold_hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "assert_done_restart",
+      "type": "sva",
+      "directive": "a_done_restart",
+      "signal": "cov_done_ok_valid",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "restart_hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "assert_int_lifecycle",
+      "type": "sva",
+      "directive": "a_int_lifecycle",
+      "signal": "cov_int_set,cov_int_clr",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "int_cycle_hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "assert_addr_diversity",
+      "type": "sva",
+      "directive": "a_addr_div",
+      "signal": "cov_addr,cov_wr_ok",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "addr_div_hit", "value": 1 }
+      ]
+    }
+  ]
+}

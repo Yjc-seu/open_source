@@ -1,0 +1,44 @@
+MIT License
+
+本项目 axidma_public 为对开源 AXI 流式 DMA 核心 verilog-axi/axi_dma 的改编
+（竞赛 DUT 包装）。
+
+上游出处与许可：
+  https://github.com/alexforencich/verilog-axi
+    rtl/axi_dma.v        —— Copyright (c) 2018 Alex Forencich
+    rtl/axi_dma_rd.v     —— Copyright (c) 2018 Alex Forencich
+    rtl/axi_dma_wr.v     —— Copyright (c) 2018 Alex Forencich
+    rtl/axi_dma_desc_mux.v —— Copyright (c) 2019 Alex Forencich
+    rtl/axi_ram.v        —— Copyright (c) 2018 Alex Forencich
+  https://github.com/alexforencich/verilog-axis
+    rtl/arbiter.v        —— Copyright (c) 2014-2021 Alex Forencich
+  （上游文件原样保留在 dut/ 目录，文件头含来源注释；经实例化确认：
+    axi_dma 例化 axi_dma_rd + axi_dma_wr，二者自包含；
+    axi_dma_desc_mux 例化 arbiter；axi_ram 自包含。本包构建仅使用
+    axi_dma.v / axi_dma_rd.v / axi_dma_wr.v，其余为上游架构参考件。）
+
+改编部分：
+  dut/axidma_top.v（顶层包装 / 描述符 RAM / CSR 主机 FSM / 确定性自动响应
+  从机 / 隐藏参数机制 / 覆盖观测总线 / 时序序列监视器）、dut/covergroup.svh、
+  dut/assert_cov.svh、dut/coverage_meta.json、dut/dut_spec.md、local_sim.py、
+  coverage_simulator.py、harness.py、inference_interface.py、cross_check.py、
+  verify_all_bins.py、verilator_harness/*、命题说明.md、README.md ——
+  Copyright (c) 2026 EDA Elite Challenge Committee
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

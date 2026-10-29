@@ -1,0 +1,32 @@
+本项目 apbspi_public 为对开源 SPI 主机控制器 apb_spi_master 的改编
+（竞赛 DUT 包装）。
+
+上游出处与许可：
+  https://github.com/pulp-platform/apb_spi_master
+  Copyright 2015 ETH Zurich and University of Bologna
+  Solderpad Hardware License, Version 0.51 (SHL-0.51)
+  http://solderpad.org/licenses/SHL-0.51
+  - dut/apb_spi_master.sv、dut/spi_master_apb_if.sv 取自 apb_spi_master
+    master 分支（v0.1.0），原样保留（仅文件头加来源注释与 timescale）；
+  - dut/spi_master_clkgen.sv、spi_master_controller.sv、spi_master_fifo.sv、
+    spi_master_rx.sv、spi_master_tx.sv 为 apb_spi_master 中符号链接指向的
+    pulp-platform/axi_spi_master IP（commit
+    ee219078353a76e468674c25675f5b7fe5f51127，同许可），原样保留。
+  - 上游完整许可文本见 dut/LICENSE。
+
+改编部分（同样以 Solderpad Hardware License, Version 0.51 发布）：
+  dut/apbspi_top.v（顶层包装 / 逻辑 CSR / APB 主机 FSM 与状态嗅探 /
+  CPOL/CPHA 模式转换 / 隐藏参数机制 / 覆盖观测总线 / 时序序列监视器）、
+  local_sim.py、coverage_simulator.py、harness.py、inference_interface.py、
+  cross_check.py、verify_all_bins.py、verilator_harness/*、
+  文档等 —— Copyright (c) 2026 EDA Elite Challenge Committee。
+
+Licensed under the Solderpad Hardware License, Version 0.51 (the
+"License"); you may not use this file except in compliance with the
+License. You may obtain a copy of the License at
+http://solderpad.org/licenses/SHL-0.51. Unless required by applicable law
+or agreed to in writing, software, hardware and materials distributed
+under this License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
+OR CONDITIONS OF ANY KIND, either express or implied. See the License for
+the specific language governing permissions and limitations under the
+License.

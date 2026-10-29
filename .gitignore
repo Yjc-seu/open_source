@@ -1,0 +1,13 @@
+# 构建产物与缓存（不入库）
+__pycache__/
+*.pyc
+obj_dir/
+baked_params.txt
+coverage_curves.json
+
+# 临时/抓取目录
+.axisframe_upstream/
+
+# 系统
+.DS_Store
+Thumbs.db

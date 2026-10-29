@@ -1,0 +1,34 @@
+本项目 axispimaster_public 为对开源 AXI SPI 主机控制器 axi_spi_master 的
+改编（竞赛 DUT 包装）。
+
+上游出处与许可：
+  https://github.com/pulp-platform/axi_spi_master
+  Copyright 2015 ETH Zurich and University of Bologna
+  Solderpad Hardware License, Version 0.51 (SHL-0.51)
+  http://solderpad.org/licenses/SHL-0.51
+  - dut/axi_spi_master.sv、dut/spi_master_axi_if.sv、
+    dut/spi_master_clkgen.sv、dut/spi_master_controller.sv、
+    dut/spi_master_fifo.sv、dut/spi_master_rx.sv、dut/spi_master_tx.sv
+    取自 axi_spi_master master 分支（2019 归档），原样保留（仅文件头加
+    来源注释与 timescale）；
+  - dut/README.md（UPSTREAM_README.md）、dut/CHANGELOG.md、
+    dut/src_files.yml 为上游文档，原样保留；
+  - 上游完整许可文本见 dut/LICENSE。
+
+改编部分（同样以 Solderpad Hardware License, Version 0.51 发布）：
+  dut/axispimaster_top.v（顶层包装 / 微型确定性 AXI 主机 FSM 与状态嗅探 /
+  隐藏参数机制 / 覆盖观测总线 / 时序序列监视器）、dut/covergroup.svh、
+  dut/assert_cov.svh、dut/coverage_meta.json、dut/dut_spec.md、
+  local_sim.py、coverage_simulator.py、harness.py、inference_interface.py、
+  cross_check.py、verify_all_bins.py、verilator_harness/*、
+  文档等 —— Copyright (c) 2026 EDA Elite Challenge Committee。
+
+Licensed under the Solderpad Hardware License, Version 0.51 (the
+"License"); you may not use this file except in compliance with the
+License. You may obtain a copy of the License at
+http://solderpad.org/licenses/SHL-0.51. Unless required by applicable law
+or agreed to in writing, software, hardware and materials distributed
+under this License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
+OR CONDITIONS OF ANY KIND, either express or implied. See the License for
+the specific language governing permissions and limitations under the
+License.

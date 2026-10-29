@@ -1,0 +1,43 @@
+BSD 3-Clause License
+
+本项目 darkriscv_public 为对开源 RISC-V 处理器核 darkriscv 的改编（竞赛 DUT
+包装）。
+
+上游出处与许可：
+  https://github.com/darklife/darkriscv
+  rtl/darkriscv.v、rtl/config.vh —— Copyright (c) 2018, Marcelo Samsoniuk
+  All rights reserved.
+  （上游文件原样保留在 dut/ 目录，文件头含来源注释与许可原文；darkriscv.v
+  的 `` `include `` 路径改为同目录 config.vh，未作任何逻辑修改。）
+
+改编部分：
+  dut/darkriscv_top.v（顶层包装 / 内置指令与数据 RAM / cfg 装载协议 / 内存
+  控制器 / 陷阱观测与隐藏参数机制 / 覆盖观测总线 / 时序序列监视器）、
+  local_sim.py、coverage_simulator.py、harness.py、inference_interface.py、
+  cross_check.py、verify_all_bins.py、verilator_harness/*、文档等 ——
+  Copyright (c) 2026 EDA Elite Challenge Committee
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+* Neither the name of the copyright holder nor the names of its
+  contributors may be used to endorse or promote products derived from
+  this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.

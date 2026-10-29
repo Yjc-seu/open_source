@@ -1,0 +1,541 @@
+{
+  "dut_name": "femtorv_public",
+  "version": "v1.0",
+  "total_bins": 128,
+  "coverpoints": [
+    {
+      "name": "opcode_value",
+      "type": "basic",
+      "signal": "cov_opcode",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "op_lui", "value": 55 },
+        { "name": "op_auipc", "value": 23 },
+        { "name": "op_jal", "value": 111 },
+        { "name": "op_jalr", "value": 103 },
+        { "name": "op_branch", "value": 99 },
+        { "name": "op_load", "value": 3 },
+        { "name": "op_store", "value": 35 },
+        { "name": "op_opimm", "value": 19 },
+        { "name": "op_op", "value": 51 },
+        { "name": "op_fence", "value": 15 },
+        { "name": "op_system", "value": 115 },
+        { "name": "op_custom3", "value": 123 }
+      ]
+    },
+    {
+      "name": "funct3_value",
+      "type": "basic",
+      "signal": "cov_funct3",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "f3_0", "value": 0 },
+        { "name": "f3_1", "value": 1 },
+        { "name": "f3_2", "value": 2 },
+        { "name": "f3_3", "value": 3 },
+        { "name": "f3_4", "value": 4 },
+        { "name": "f3_5", "value": 5 },
+        { "name": "f3_6", "value": 6 },
+        { "name": "f3_7", "value": 7 }
+      ]
+    },
+    {
+      "name": "rd_boundary",
+      "type": "basic",
+      "signal": "cov_rd",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "rd_x0", "value": 0 },
+        { "name": "rd_x1", "value": 1 },
+        { "name": "rd_x31", "value": 31 }
+      ]
+    },
+    {
+      "name": "rs1_boundary",
+      "type": "basic",
+      "signal": "cov_rs1",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "rs1_x0", "value": 0 },
+        { "name": "rs1_x1", "value": 1 },
+        { "name": "rs1_x31", "value": 31 }
+      ]
+    },
+    {
+      "name": "rs2_boundary",
+      "type": "basic",
+      "signal": "cov_rs2",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "rs2_x0", "value": 0 },
+        { "name": "rs2_x1", "value": 1 },
+        { "name": "rs2_x31", "value": 31 }
+      ]
+    },
+    {
+      "name": "mem_rd_state",
+      "type": "basic",
+      "signal": "cov_mem_rd",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "mrd_read", "value": 1 },
+        { "name": "mrd_write", "value": 0 }
+      ]
+    },
+    {
+      "name": "mem_wstrb_value",
+      "type": "basic",
+      "signal": "cov_mem_wstrb",
+      "source": "top",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "wst_none", "value": 0 },
+        { "name": "wst_lane0", "value": 1 },
+        { "name": "wst_lane1", "value": 2 },
+        { "name": "wst_lane2", "value": 4 },
+        { "name": "wst_lane3", "value": 8 },
+        { "name": "wst_hw_even", "value": 3 },
+        { "name": "wst_hw_odd", "value": 12 },
+        { "name": "wst_word", "value": 15 }
+      ]
+    },
+    {
+      "name": "pc_boundary",
+      "type": "boundary",
+      "signal": "cov_pc",
+      "source": "top",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "pc_start", "value": 0 },
+        { "name": "pc_second", "value": 4 },
+        { "name": "pc_mid", "value": 2044 },
+        { "name": "pc_lastword", "value": 4092 }
+      ]
+    },
+    {
+      "name": "mem_addr_boundary",
+      "type": "boundary",
+      "signal": "cov_mem_addr",
+      "source": "top",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "ma_zero", "value": 0 },
+        { "name": "ma_first_word", "value": 4 },
+        { "name": "ma_lastword_m2", "value": 65528 },
+        { "name": "ma_lastword", "value": 65532 }
+      ]
+    },
+    {
+      "name": "wdata_boundary",
+      "type": "boundary",
+      "signal": "cov_mem_wdata",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "wd_zero", "value": 0 },
+        { "name": "wd_one", "value": 1 },
+        { "name": "wd_upper_m1", "value": 65534 },
+        { "name": "wd_allones", "value": 65535 }
+      ]
+    },
+    {
+      "name": "rdata_boundary",
+      "type": "boundary",
+      "signal": "cov_mem_rdata",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "rd_zero", "value": 0 },
+        { "name": "rd_one", "value": 1 },
+        { "name": "rd_upper_m1", "value": 65534 },
+        { "name": "rd_allones", "value": 65535 }
+      ]
+    },
+    {
+      "name": "instr_cnt_boundary",
+      "type": "boundary",
+      "signal": "cov_instr_cnt",
+      "source": "top",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "ic_zero", "value": 0 },
+        { "name": "ic_one", "value": 1 },
+        { "name": "ic_254", "value": 254 },
+        { "name": "ic_255", "value": 255 }
+      ]
+    },
+    {
+      "name": "busy_state",
+      "type": "condition",
+      "signal": "cov_busy",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "busy_off", "value": 0 },
+        { "name": "busy_on", "value": 1 }
+      ]
+    },
+    {
+      "name": "trap_state",
+      "type": "condition",
+      "signal": "cov_trap",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "trap_off", "value": 0 },
+        { "name": "trap_on", "value": 1 }
+      ]
+    },
+    {
+      "name": "fetch_kind",
+      "type": "condition",
+      "signal": "cov_mem_instr",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "data_access", "value": 0 },
+        { "name": "fetch_access", "value": 1 }
+      ]
+    },
+    {
+      "name": "branch_dir",
+      "type": "condition",
+      "signal": "cov_branch_taken",
+      "source": "top",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "branch_not_taken", "value": 0 },
+        { "name": "branch_taken", "value": 1 }
+      ]
+    },
+    {
+      "name": "cfg_ok_state",
+      "type": "condition",
+      "signal": "cov_cfg_ok",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "cfg_rejected", "value": 0 },
+        { "name": "cfg_accepted", "value": 1 }
+      ]
+    },
+    {
+      "name": "hold_state",
+      "type": "condition",
+      "signal": "cov_hold",
+      "source": "top",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "hold_off", "value": 0 },
+        { "name": "hold_on", "value": 1 }
+      ]
+    },
+    {
+      "name": "done_ok_class",
+      "type": "temporal",
+      "signal": "cov_done_ok_class",
+      "valid_signal": "cov_done_ok_valid",
+      "source": "top",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "done_ok_0", "value": 0 },
+        { "name": "done_ok_1", "value": 1 },
+        { "name": "done_ok_2", "value": 2 },
+        { "name": "done_ok_3", "value": 3 }
+      ]
+    },
+    {
+      "name": "opcode_x_funct3",
+      "type": "cross",
+      "signal": "cov_opcode,cov_funct3",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "op_add", "cross": [51, 0] },
+        { "name": "op_srl", "cross": [51, 5] },
+        { "name": "opimm_addi", "cross": [19, 0] },
+        { "name": "opimm_xori", "cross": [19, 4] },
+        { "name": "br_beq", "cross": [99, 0] },
+        { "name": "br_bgeu", "cross": [99, 7] },
+        { "name": "ld_lw", "cross": [3, 2] },
+        { "name": "st_sw", "cross": [35, 2] }
+      ]
+    },
+    {
+      "name": "mem_rd_x_wstrb",
+      "type": "cross",
+      "signal": "cov_mem_rd,cov_mem_wstrb",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "read_none", "cross": [1, 0] },
+        { "name": "write_lane0", "cross": [0, 1] },
+        { "name": "write_hw_even", "cross": [0, 3] },
+        { "name": "write_word", "cross": [0, 15] }
+      ]
+    },
+    {
+      "name": "busy_x_trap",
+      "type": "cross",
+      "signal": "cov_busy,cov_trap",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "both_off", "cross": [0, 0] },
+        { "name": "trap_idle", "cross": [0, 1] },
+        { "name": "busy_only", "cross": [1, 0] },
+        { "name": "busy_trap", "cross": [1, 1] }
+      ]
+    },
+    {
+      "name": "trap_x_hold",
+      "type": "cross",
+      "signal": "cov_trap,cov_hold",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "both_off", "cross": [0, 0] },
+        { "name": "hold_only", "cross": [0, 1] },
+        { "name": "trap_only", "cross": [1, 0] }
+      ]
+    },
+    {
+      "name": "hold_x_opcode",
+      "type": "cross",
+      "signal": "cov_hold,cov_opcode",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "hold_system", "cross": [1, 115] },
+        { "name": "hold_opimm", "cross": [1, 19] },
+        { "name": "hold_custom3", "cross": [1, 123] }
+      ]
+    },
+    {
+      "name": "access_kind",
+      "type": "cross",
+      "signal": "cov_mem_instr,cov_mem_rd",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "fetch", "cross": [1, 1] },
+        { "name": "load", "cross": [0, 1] },
+        { "name": "store", "cross": [0, 0] }
+      ]
+    },
+    {
+      "name": "busy_x_hold",
+      "type": "cross",
+      "signal": "cov_busy,cov_hold",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "both_off", "cross": [0, 0] },
+        { "name": "hold_idle", "cross": [0, 1] },
+        { "name": "busy_only", "cross": [1, 0] }
+      ]
+    },
+    {
+      "name": "seq_full_lifecycle",
+      "type": "seq_hit",
+      "seq": "cov_seq1",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_branch_loop",
+      "type": "seq_hit",
+      "seq": "cov_seq2",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_call_return",
+      "type": "seq_hit",
+      "seq": "cov_seq3",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_ld_alu_st",
+      "type": "seq_hit",
+      "seq": "cov_seq4",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_sequential_stream",
+      "type": "seq_hit",
+      "seq": "cov_seq5",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_hold_persist",
+      "type": "seq_hit",
+      "seq": "cov_seq6",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_hold_done_ok",
+      "type": "seq_hit",
+      "seq": "cov_seq7",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_busy_cont",
+      "type": "seq_hit",
+      "seq": "cov_seq8",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_trap_restart",
+      "type": "seq_hit",
+      "seq": "cov_seq9",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_idle_stable",
+      "type": "seq_hit",
+      "seq": "cov_seq10",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_quick_finish",
+      "type": "seq_hit",
+      "seq": "cov_seq11",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_trap_consistent",
+      "type": "seq_hit",
+      "seq": "cov_seq12",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "ds_hold_window_max",
+      "type": "deep",
+      "signal": "cov_hold",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "hold_window_hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "ds_done_ok_class_switch",
+      "type": "deep",
+      "signal": "cov_done_ok_class,cov_done_ok_valid",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "class_switch_hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "ds_opcode_diversity",
+      "type": "deep",
+      "signal": "cov_opcode,cov_instr_cnt",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "opcode_div_hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "dataflow_busy_streak",
+      "type": "sva",
+      "signal": "cov_busy",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "busy2", "value": 1, "directive": "a_df_busy2" },
+        { "name": "busy4", "value": 1, "directive": "a_df_busy4" },
+        { "name": "busy8", "value": 1, "directive": "a_df_busy8" }
+      ]
+    },
+    {
+      "name": "timing_active_dwell",
+      "type": "sva",
+      "signal": "cov_busy",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "act1", "value": 1, "directive": "a_tp_act1" },
+        { "name": "act8", "value": 1, "directive": "a_tp_act8" },
+        { "name": "act16", "value": 1, "directive": "a_tp_act16" }
+      ]
+    },
+    {
+      "name": "timing_hold_dwell",
+      "type": "sva",
+      "signal": "cov_hold",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "hold4", "value": 1, "directive": "a_tp_hold4" },
+        { "name": "holdfull", "value": 1, "directive": "a_tp_holdfull" }
+      ]
+    },
+    {
+      "name": "timing_idle_dwell",
+      "type": "sva",
+      "signal": "cov_busy,cov_hold,cov_trap",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "idle4", "value": 1, "directive": "a_tp_idle4" },
+        { "name": "idle16", "value": 1, "directive": "a_tp_idle16" }
+      ]
+    }
+  ]
+}

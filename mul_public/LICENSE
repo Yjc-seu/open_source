@@ -1,0 +1,35 @@
+MIT License
+
+本项目 mul_public 为对开源数学核心 Project F Library 的改编（竞赛 DUT
+包装）。
+
+上游出处与许可：
+  https://github.com/projf/projf-explore
+  lib/maths/mul.sv   —— Copyright (C) 2023 Will Green
+  Project F Library, open source hardware released under the MIT License
+  （上游文件原样保留在 dut/ 目录，文件头含来源注释）
+
+改编部分：
+  dut/mul_top.v（顶层包装 / 配置寄存器 / 启动受理 / 隐藏参数机制 /
+  覆盖观测总线 / 时序序列监视器）、local_sim.py、coverage_simulator.py、
+  harness.py、inference_interface.py、cross_check.py、verify_all_bins.py、
+  verilator_harness/*、文档等 ——
+  Copyright (c) 2026 EDA Elite Challenge Committee
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

@@ -1,0 +1,47 @@
+BSD 2-Clause License
+====================
+
+本包的上游 RTL（dut/sha512_core.v、dut/sha512_h_constants.v、
+dut/sha512_k_constants.v、dut/sha512_w_mem.v、dut/sha512.v）源自
+secworks/sha512（https://github.com/secworks/sha512，Copyright (c) 2014,
+Secworks Sweden AB），按 BSD-2-Clause 许可分发，原文如下；各文件头部的
+版权声明与许可条款保持不变。
+
+Copyright (c) 2014, Secworks Sweden AB
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice,
+   this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGE.
+
+---
+
+改编声明
+--------
+
+本包为上述上游核心的竞赛格式改编：
+- 上游五个 RTL 文件逻辑原样保留，仅文件头添加"来源 + BSD-2"注释行与
+  `` `timescale 1ns/1ps `` 指令；
+- 新增原创文件（dut/sha512_top.v、dut/dut_spec.md、dut/coverage_meta.json、
+  dut/covergroup.svh、dut/assert_cov.svh、local_sim.py、
+  coverage_simulator.py、harness.py、inference_interface.py、
+  cross_check.py、verify_all_bins.py、verilator_harness/*、命题说明.md、
+  README.md）为原创作品，按 MIT 许可分发（与上游许可兼容）。

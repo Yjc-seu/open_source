@@ -1,0 +1,518 @@
+{
+  "dut_name": "apbspi_public",
+  "version": "v1.0",
+  "total_bins": 114,
+  "coverpoints": [
+    {
+      "name": "mode_cpol_cpha",
+      "type": "cross",
+      "signal": "cov_cpol,cov_cpha",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "m_00", "cross": [0, 0] },
+        { "name": "m_01", "cross": [0, 1] },
+        { "name": "m_10", "cross": [1, 0] },
+        { "name": "m_11", "cross": [1, 1] }
+      ]
+    },
+    {
+      "name": "clkdiv_tier",
+      "type": "basic",
+      "signal": "cov_clkdiv",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "d_zero", "value": 0 },
+        { "name": "d_min", "value": 1 },
+        { "name": "d_typ", "value": 8 },
+        { "name": "d_max", "value": 255 }
+      ]
+    },
+    {
+      "name": "state",
+      "type": "basic",
+      "signal": "cov_state",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "s_idle", "value": 0 },
+        { "name": "s_tx", "value": 1 },
+        { "name": "s_rx", "value": 2 },
+        { "name": "s_wait", "value": 3 }
+      ]
+    },
+    {
+      "name": "bit_cnt_tier",
+      "type": "basic",
+      "signal": "cov_bit_cnt",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "b_zero", "value": 0 },
+        { "name": "b_byte", "value": 8 },
+        { "name": "b_word", "value": 32 },
+        { "name": "b_long", "value": 64 }
+      ]
+    },
+    {
+      "name": "tx_byte_tier",
+      "type": "basic",
+      "signal": "cov_tx_byte",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "txb_zero", "value": 0 },
+        { "name": "txb_one", "value": 1 },
+        { "name": "txb_fe", "value": 254 },
+        { "name": "txb_ff", "value": 255 }
+      ]
+    },
+    {
+      "name": "rx_byte_tier",
+      "type": "basic",
+      "signal": "cov_rx_byte",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "rxb_zero", "value": 0 },
+        { "name": "rxb_one", "value": 1 },
+        { "name": "rxb_fe", "value": 254 },
+        { "name": "rxb_ff", "value": 255 }
+      ]
+    },
+    {
+      "name": "clkdiv_boundary",
+      "type": "boundary",
+      "signal": "cov_clkdiv",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "db_zero", "value": 0 },
+        { "name": "db_one", "value": 1 },
+        { "name": "db_upper_m1", "value": 254 },
+        { "name": "db_allones", "value": 255 }
+      ]
+    },
+    {
+      "name": "tx_byte_boundary",
+      "type": "boundary",
+      "signal": "cov_tx_byte",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "txbb_zero", "value": 0 },
+        { "name": "txbb_one", "value": 1 },
+        { "name": "txbb_upper_m1", "value": 254 },
+        { "name": "txbb_allones", "value": 255 }
+      ]
+    },
+    {
+      "name": "rx_byte_boundary",
+      "type": "boundary",
+      "signal": "cov_rx_byte",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "rxbb_zero", "value": 0 },
+        { "name": "rxbb_one", "value": 1 },
+        { "name": "rxbb_upper_m1", "value": 254 },
+        { "name": "rxbb_allones", "value": 255 }
+      ]
+    },
+    {
+      "name": "cmd_len_boundary",
+      "type": "boundary",
+      "signal": "cov_cmd_len",
+      "source": "top",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "cl_zero", "value": 0 },
+        { "name": "cl_one", "value": 1 },
+        { "name": "cl_upper_m1", "value": 31 },
+        { "name": "cl_allones", "value": 32 }
+      ]
+    },
+    {
+      "name": "data_len_boundary",
+      "type": "boundary",
+      "signal": "cov_data_len",
+      "source": "top",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "dl_zero", "value": 0 },
+        { "name": "dl_one", "value": 1 },
+        { "name": "dl_byte", "value": 8 },
+        { "name": "dl_max", "value": 65535 }
+      ]
+    },
+    {
+      "name": "busy_state",
+      "type": "condition",
+      "signal": "cov_busy",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "busy_off", "value": 0 },
+        { "name": "busy_on", "value": 1 }
+      ]
+    },
+    {
+      "name": "miso_level",
+      "type": "condition",
+      "signal": "cov_miso",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "miso_low", "value": 0 },
+        { "name": "miso_high", "value": 1 }
+      ]
+    },
+    {
+      "name": "cfg_accept",
+      "type": "condition",
+      "signal": "cov_cfg_ok",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "cfg_rejected", "value": 0 },
+        { "name": "cfg_accepted", "value": 1 }
+      ]
+    },
+    {
+      "name": "loopback_mode",
+      "type": "condition",
+      "signal": "cov_loopback",
+      "source": "top",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "lb_off", "value": 0 },
+        { "name": "lb_on", "value": 1 }
+      ]
+    },
+    {
+      "name": "mode_switch",
+      "type": "condition",
+      "signal": "cov_mode_switch",
+      "source": "top",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "never_switched", "value": 0 },
+        { "name": "switched", "value": 1 }
+      ]
+    },
+    {
+      "name": "done_ok_class",
+      "type": "temporal",
+      "signal": "cov_done_ok_class",
+      "valid_signal": "cov_done_ok_valid",
+      "source": "top",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "class_0", "value": 0 },
+        { "name": "class_1", "value": 1 },
+        { "name": "class_2", "value": 2 },
+        { "name": "class_3", "value": 3 }
+      ]
+    },
+    {
+      "name": "mode_x_state",
+      "type": "cross",
+      "signal": "cov_cpol,cov_cpha,cov_state",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "m00_idle", "cross": [0, 0, 0] },
+        { "name": "m00_tx", "cross": [0, 0, 1] },
+        { "name": "m00_rx", "cross": [0, 0, 2] },
+        { "name": "m01_tx", "cross": [0, 1, 1] },
+        { "name": "m10_tx", "cross": [1, 0, 1] },
+        { "name": "m11_tx", "cross": [1, 1, 1] },
+        { "name": "m11_rx", "cross": [1, 1, 2] },
+        { "name": "m11_wait", "cross": [1, 1, 3] }
+      ]
+    },
+    {
+      "name": "clkdiv_x_hold",
+      "type": "cross",
+      "signal": "cov_clkdiv,cov_hold",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "d1_hold", "cross": [1, 1] },
+        { "name": "d8_hold", "cross": [8, 1] },
+        { "name": "d255_hold", "cross": [255, 1] }
+      ]
+    },
+    {
+      "name": "tx_byte_x_state",
+      "type": "cross",
+      "signal": "cov_tx_byte,cov_state",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "txb00_tx", "cross": [0, 1] },
+        { "name": "txbff_tx", "cross": [255, 1] }
+      ]
+    },
+    {
+      "name": "rx_byte_x_state",
+      "type": "cross",
+      "signal": "cov_rx_byte,cov_state",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "rxb00_rx", "cross": [0, 2] },
+        { "name": "rxbff_rx", "cross": [255, 2] }
+      ]
+    },
+    {
+      "name": "len_x_state",
+      "type": "cross",
+      "signal": "cov_data_len,cov_state",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "len0_idle", "cross": [0, 0] },
+        { "name": "len1_tx", "cross": [1, 1] },
+        { "name": "len8_tx", "cross": [8, 1] },
+        { "name": "lenmax_tx", "cross": [65535, 1] }
+      ]
+    },
+    {
+      "name": "busy_x_miso",
+      "type": "cross",
+      "signal": "cov_busy,cov_miso",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "b0_m0", "cross": [0, 0] },
+        { "name": "b0_m1", "cross": [0, 1] },
+        { "name": "b1_m0", "cross": [1, 0] },
+        { "name": "b1_m1", "cross": [1, 1] }
+      ]
+    },
+    {
+      "name": "state_x_loopback",
+      "type": "cross",
+      "signal": "cov_state,cov_loopback",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "idle_nolb", "cross": [0, 0] },
+        { "name": "idle_lb", "cross": [0, 1] },
+        { "name": "tx_lb", "cross": [1, 1] },
+        { "name": "rx_lb", "cross": [2, 1] }
+      ]
+    },
+    {
+      "name": "clkdiv_x_state",
+      "type": "cross",
+      "signal": "cov_clkdiv,cov_state",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "d0_idle", "cross": [0, 0] },
+        { "name": "d1_tx", "cross": [1, 1] },
+        { "name": "d8_tx", "cross": [8, 1] },
+        { "name": "d255_tx", "cross": [255, 1] }
+      ]
+    },
+    {
+      "name": "seq_full_lifecycle",
+      "type": "seq_hit",
+      "seq": "cov_seq1",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_back_to_back",
+      "type": "seq_hit",
+      "seq": "cov_seq2",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_mode_quad",
+      "type": "seq_hit",
+      "seq": "cov_seq3",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_hold_persist",
+      "type": "seq_hit",
+      "seq": "cov_seq4",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_hold_then_ok",
+      "type": "seq_hit",
+      "seq": "cov_seq5",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_miso_variation",
+      "type": "seq_hit",
+      "seq": "cov_seq6",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_busy_cont",
+      "type": "seq_hit",
+      "seq": "cov_seq7",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_idle_stable",
+      "type": "seq_hit",
+      "seq": "cov_seq8",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_quick_settle",
+      "type": "seq_hit",
+      "seq": "cov_seq9",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_loopback_roundtrip",
+      "type": "seq_hit",
+      "seq": "cov_seq10",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_multi_div",
+      "type": "seq_hit",
+      "seq": "cov_seq11",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "seq_done_consistent",
+      "type": "seq_hit",
+      "seq": "cov_seq12",
+      "source": "derived",
+      "difficulty": "medium",
+      "bins": [
+        { "name": "hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "ds_hold_window",
+      "type": "deep",
+      "signal": "cov_hold",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "hold_window_hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "ds_class_switch",
+      "type": "deep",
+      "signal": "cov_done_ok_class,cov_done_ok_valid",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "class_switch_hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "ds_div_diversity",
+      "type": "deep",
+      "signal": "cov_clkdiv,cov_busy",
+      "source": "derived",
+      "difficulty": "hard",
+      "bins": [
+        { "name": "div_diversity_hit", "value": 1 }
+      ]
+    },
+    {
+      "name": "dataflow_busy_streak",
+      "type": "sva",
+      "signal": "cov_busy",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "busy2", "value": 1, "directive": "a_df_busy2" },
+        { "name": "busy4", "value": 1, "directive": "a_df_busy4" },
+        { "name": "busy8", "value": 1, "directive": "a_df_busy8" }
+      ]
+    },
+    {
+      "name": "timing_active_dwell",
+      "type": "sva",
+      "signal": "cov_busy",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "act1", "value": 1, "directive": "a_tp_act1" },
+        { "name": "act8", "value": 1, "directive": "a_tp_act8" },
+        { "name": "act16", "value": 1, "directive": "a_tp_act16" }
+      ]
+    },
+    {
+      "name": "timing_hold_dwell",
+      "type": "sva",
+      "signal": "cov_hold",
+      "source": "derived",
+      "difficulty": "hardest",
+      "bins": [
+        { "name": "hold4", "value": 1, "directive": "a_tp_hold4" },
+        { "name": "holdfull", "value": 1, "directive": "a_tp_holdfull" }
+      ]
+    },
+    {
+      "name": "timing_idle_dwell",
+      "type": "sva",
+      "signal": "cov_busy,cov_hold",
+      "source": "derived",
+      "difficulty": "easy",
+      "bins": [
+        { "name": "idle4", "value": 1, "directive": "a_tp_idle4" },
+        { "name": "idle16", "value": 1, "directive": "a_tp_idle16" }
+      ]
+    }
+  ]
+}
